@@ -9,24 +9,6 @@ import (
 	"strings"
 )
 
-// 1. calc size with mat
-// 2. calc matt offset
-// 	- (matt - orig size) / 2
-// 3. create image the size with mat
-// 4. copy photo image to mat, starting at matt offset
-
-type Foo struct {
-	src  image.Image
-	dst  image.Image
-	xoff int
-	yoff int
-}
-
-func mat(f Foo) {
-	// image.NewNRGBA(j
-	// draw.Draw(f.dst, f.src.Bounds(), f.src, image.Pt(xoff, yoff), draw.Src)
-}
-
 func main() {
 
 	pic, err := os.Open(os.Args[1])
