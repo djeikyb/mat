@@ -6,11 +6,12 @@ import (
 	"image"
 	"image/color"
 	"image/draw"
-	"image/jpeg"
 	"log"
 	"os"
 	"runtime/pprof"
 	"strings"
+
+	jpeg "github.com/kjk/golibjpegturbo"
 )
 
 var profile = flag.Bool("p", false, "write cpu profile `file`")
@@ -37,7 +38,7 @@ func main() {
 		panic(err)
 	}
 
-	im, _, err := image.Decode(pic)
+	im, err := jpeg.Decode(pic)
 	if err != nil {
 		panic(err)
 	}
