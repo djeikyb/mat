@@ -1,15 +1,35 @@
 package main
 
 import (
+	"flag"
 	"image"
 	"image/color"
 	"image/draw"
 	"image/jpeg"
+	"log"
 	"os"
+	"runtime/pprof"
 	"strings"
 )
 
+var profile = flag.Bool("p", false, "write cpu profile `file`")
+
 func main() {
+
+	flag.Parse()
+	if *profile {
+
+		log.Println("pprof enabled")
+
+		f, err := os.Create("cpu.pprof")
+		if err != nil {
+			log.Fatal("could not create CPU profile: ", err)
+		}
+		if err := pprof.StartCPUProfile(f); err != nil {
+			log.Fatal("could not start CPU profile: ", err)
+		}
+		defer pprof.StopCPUProfile()
+	}
 
 	pic, err := os.Open(os.Args[1])
 	if err != nil {
