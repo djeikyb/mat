@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"image"
 	"image/color"
@@ -55,8 +56,10 @@ func main() {
 		panic(err)
 	}
 
+	bufmat := bufio.NewWriterSize(matted, 8192)
+
 	opts := &jpeg.Options{100}
-	err = jpeg.Encode(matted, dst, opts)
+	err = jpeg.Encode(bufmat, dst, opts)
 	if err != nil {
 		panic(err)
 	}
